@@ -20,3 +20,5 @@ server.listen(port, function() {
 //   console.log('Meu middleware global 2')
 //   res.send('Funcionou')
 // })
+
+module.exports = server
