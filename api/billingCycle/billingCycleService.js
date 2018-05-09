@@ -6,6 +6,26 @@ BillingCycle.updateOptions({
   runValidators: true // Aplica as validações do schema às requisições PUT
 })
 
+// Intercepta resposta para uniformizar errors
+BillingCycle.after('post', sendErrorsOrNext).after('put', sendErrorsOrNext)
+
+function sendErrorsOrNext(req, res, next) {
+  const bundle = res.locals.bundle
+  if (bundle.errors) {
+    const errors = parseErrors(bundle.errors)
+    res.status(500).json({errors})
+  } else next()
+}
+
+function parseErrors(nodeRestfulErrors) {
+  return Object.keys(nodeRestfulErrors).map(error => 
+    nodeRestfulErrors[error].message)
+  // const _ = require('lodash')
+  // const errors = []
+  // _.forIn(nodeRestfulErrors, error => errors.push(error.message))
+  // return errors
+}
+
 BillingCycle.route('count', (req, res, next) => {
   BillingCycle.count((error, value) => {
     if (error) 

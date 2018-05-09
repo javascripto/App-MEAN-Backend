@@ -8,6 +8,9 @@ module.exports = function(server) {
   // Rotas da API
   const billingCycleService = require('../api/billingCycle/billingCycleService')
   billingCycleService.register(router, '/billingCycles')
+  
+  const billingSummaryService = require('../api/billingSummary/billingSummaryService')
+  router.route('/billingSummary').get(billingSummaryService.getSummary)
 }
 
 // Testando POST com postman na URL http://localhost:3003/api/billingCycles
@@ -24,3 +27,7 @@ module.exports = function(server) {
 // debts[1][name]:Condominio
 // debts[1][value]:720
 // debts[1][status]:AGENDADO
+
+// Teste tambem com GET nas URL's
+// http://localhost:3003/api/billingCycles/count
+// http://localhost:3003/api/billingSummary

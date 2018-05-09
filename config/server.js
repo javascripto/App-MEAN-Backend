@@ -1,7 +1,7 @@
 const port = 3003
 
 const bodyParser = require('body-parser')
-const express= require('express')
+const express = require('express')
 const server = express()
 
 // middlewares de formularios e json providos pelo body-parser
