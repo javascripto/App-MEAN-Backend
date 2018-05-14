@@ -4,11 +4,13 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const server = express()
 const allowCors = require('./cors')
+const queryParser = require('express-query-int')
 
 // middlewares de formularios e json providos pelo body-parser
 server.use(bodyParser.urlencoded({ extended: true }))
 server.use(bodyParser.json())
 server.use(allowCors)
+server.use(queryParser())
 
 server.listen(port, function() {
   console.log(`BACKEND is running on port ${port}`)
